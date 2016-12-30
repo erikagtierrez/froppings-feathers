@@ -1,0 +1,13 @@
+{
+  "host": "localhost",
+  "port": 3030,
+  "postgres": "postgres://postgres:@localhost:5432/froppingsFeathers",
+  "public": "../public/",
+  "auth": {
+    "idField": "id",
+    "token": {
+      "secret": "K1pw7nK4qF7WoPuh/EuG4xNE2NJ3ZxzOFGc4qzlvPp+rvwIyzZuowe9DyVWgHrmq5e3/gDllEEbzMRIWoTUwSw=="
+    },
+    "local": {}
+  }
+}
