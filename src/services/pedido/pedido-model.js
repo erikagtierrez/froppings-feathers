@@ -1,6 +1,6 @@
 'use strict';
 
-// user-model.js - A sequelize model
+// pedido-model.js - A sequelize model
 // 
 // See http://docs.sequelizejs.com/en/latest/docs/models-definition/
 // for more of what you can do here.
@@ -9,13 +9,7 @@ const Sequelize = require('sequelize');
 const models = Sequelize.models;
 
 module.exports = function(sequelize) {
-    const app = this;
-    const user = sequelize.define('users', {
-        cedula: {
-            type: Sequelize.INTEGER,
-            allowNull: false,
-            unique: true
-        },
+    const pedido = sequelize.define('pedidos', {
         nombre: {
             type: Sequelize.STRING,
             allowNull: false,
@@ -24,17 +18,12 @@ module.exports = function(sequelize) {
             type: Sequelize.STRING,
             allowNull: false,
         },
-        email: {
-            type: Sequelize.STRING,
-            allowNull: false,
-            unique: true
+        total: {
+            type: Sequelize.DOUBLE,
+            allowNull: false
         },
         puntos: {
             type: Sequelize.INTEGER,
-            allowNull: false,
-        },
-        password: {
-            type: Sequelize.STRING,
             allowNull: false
         }
     }, {
@@ -42,13 +31,13 @@ module.exports = function(sequelize) {
         classMethods: {
             associate(models) {
                 //console.log(models);
-                user.belongsTo(models.tipoUsuarios);
-                user.belongsToMany(models.pedidos, { through: models.historialPuntos });
+                pedido.belongsToMany(models.users, { through: models.historialPuntos });
+                pedido.belongsToMany(models.producto, { through: models.listaProductos });
             },
         }
     });
 
-    user.sync({ force: true });
+    pedido.sync({ force: true });
 
-    return user;
+    return pedido;
 };

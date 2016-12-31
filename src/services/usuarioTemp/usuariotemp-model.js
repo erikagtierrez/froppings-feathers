@@ -1,6 +1,6 @@
 'use strict';
 
-// user-model.js - A sequelize model
+// usuarioTemp-model.js - A sequelize model
 // 
 // See http://docs.sequelizejs.com/en/latest/docs/models-definition/
 // for more of what you can do here.
@@ -9,8 +9,7 @@ const Sequelize = require('sequelize');
 const models = Sequelize.models;
 
 module.exports = function(sequelize) {
-    const app = this;
-    const user = sequelize.define('users', {
+    const usuarioTemp = sequelize.define('usuarioTemps', {
         cedula: {
             type: Sequelize.INTEGER,
             allowNull: false,
@@ -24,16 +23,7 @@ module.exports = function(sequelize) {
             type: Sequelize.STRING,
             allowNull: false,
         },
-        email: {
-            type: Sequelize.STRING,
-            allowNull: false,
-            unique: true
-        },
-        puntos: {
-            type: Sequelize.INTEGER,
-            allowNull: false,
-        },
-        password: {
+        codigo: {
             type: Sequelize.STRING,
             allowNull: false
         }
@@ -42,13 +32,10 @@ module.exports = function(sequelize) {
         classMethods: {
             associate(models) {
                 //console.log(models);
-                user.belongsTo(models.tipoUsuarios);
-                user.belongsToMany(models.pedidos, { through: models.historialPuntos });
+                usuarioTemp.belongsTo(models.pedidos);
             },
         }
     });
-
-    user.sync({ force: true });
-
-    return user;
+    usuarioTemp.sync({ force: true });
+    return usuarioTemp;
 };
