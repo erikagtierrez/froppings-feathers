@@ -21,6 +21,10 @@ module.exports = function(sequelize) {
         puntos: {
             type: Sequelize.INTEGER,
             allowNull: false,
+        },
+        imagen: {
+            type: Sequelize.STRING,
+            allowNull: false
         }
     }, {
         freezeTableName: true,
